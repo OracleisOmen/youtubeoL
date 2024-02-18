@@ -1,15 +1,21 @@
-function toggleSocialIcons() {
-    const iconsContainer = document.getElementById('socialMediaIcons');
-    iconsContainer.classList.toggle('visible');
+const socialProfiles = [
+  { icon: '<i class="fab fa-twitter"></i>', url: 'https://twitter.com/yourhandle' },
+  { icon: '<i class="fab fa-twitch"></i>', url: 'https://twitch.tv/yourhandle' },
+  // Add more profiles as needed
+];
 
-    // Hide icons after 10 seconds of visibility
-    setTimeout(() => {
-        iconsContainer.classList.toggle('visible');
-    }, 10000); // Visible duration can be adjusted
+let currentIndex = 0;
+
+function updateSocialProfile() {
+  const profile = socialProfiles[currentIndex];
+  const container = document.getElementById('socialMediaIcon');
+  container.innerHTML = `<a href="${profile.url}" target="_blank" class="social-icon">${profile.icon}</a>`;
+  
+  currentIndex = (currentIndex + 1) % socialProfiles.length; // Cycle through profiles
 }
 
-// Show icons every 1 minute and 12 seconds
-setInterval(toggleSocialIcons, 72000);
+// Update every 5 seconds
+setInterval(updateSocialProfile, 5000);
 
-// Optionally, show icons shortly after page loads
-setTimeout(toggleSocialIcons, 5000);
+// Initial update
+updateSocialProfile();
